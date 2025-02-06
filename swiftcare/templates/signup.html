@@ -34,7 +34,8 @@
 
 
 <div class="container">
-<form action="" class="signup_form">
+<form action="/signup/" method="POST" class="signup_form">
+    {% csrf_token %}
 
     <h3>Sign up</h3><br>
 <label><b>Name</b></label><br>
