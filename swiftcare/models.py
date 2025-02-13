@@ -10,8 +10,3 @@ class Client(models.Model):
     def __str__(self):
         return self.client_name
 
-
-
-
-
-# Create your models here.

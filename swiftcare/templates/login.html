@@ -35,17 +35,17 @@
 
 <div class="container" >
 
-<form action="" class="signup_form">
-
+<form action="/login/" method="POST" class="signup_form">
     <h3>Login</h3> <br><br>
 
-    <label><b>Email</b></label><br>
-    <input type="email" required><br><br>
+    {% csrf_token %}
 
-    <label><b>Password</b></label><br>
-    <input type="password" required><br><br><br>
+  {{ form.as_p }} <br>
 
     <button class="btn1">Login</button>
+    <br><br>
+
+    <p>Do not have an account? <a href="{% url 'signup' %}" class="login_link"><b>Register</b></a></p>
 
 
 </form>

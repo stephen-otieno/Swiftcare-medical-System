@@ -37,26 +37,19 @@
 <form action="/signup/" method="POST" class="signup_form">
     {% csrf_token %}
 
-    <h3>Sign up</h3><br>
-<label><b>Name</b></label><br>
-<input type="text" name="client_name" required><br><br>
+
+    {{ form.as_p }}
 
 
-<label><b>Email</b></label><br>
-<input type="email" name="client_email" required><br><br>
 
 
-<label><b>Password</b></label><br>
-<input type="password" name="client_password1" required><br><br>
-
-<label><b>Confirm Password</b></label> <br>
-<input type="password" name="client_password2" required><br><br>
+    <button class="btn1" type="submit">Submit</button>
+    <br><br>
 
 
-<button class="btn1" type="submit">Submit</button>
-    <br><br><br>
 
-    <p>Already have an account? <a class="login_link"  href="{% url 'login' %}">Login</a></p>
+    <p>Already have an account? <a href="{% url 'login' %}" class="login_link"><b>Login</b></a></p>
+
 
     </form>
 </div>
