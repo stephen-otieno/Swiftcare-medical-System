@@ -11,7 +11,7 @@ from .forms import RegisterForm,CustomLoginForm
 # Create your views here.
 
 
-@login_required(login_url='login')
+
 def homepage(request):
     return render(request,'index.html')
 
@@ -44,5 +44,9 @@ def login_page(request):
         form = CustomLoginForm()
 
     return render(request, 'login.html',{'form':form})
+
+
+def patient_details(request):
+    return render(request,'patient_details.html')
 
 
