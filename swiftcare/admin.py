@@ -1,6 +1,6 @@
 from django.contrib import admin
-from swiftcare.models import (Client)
+from swiftcare.models import (Patient)
 
-admin.site.register(Client)
+admin.site.register(Patient)
 
 # Register your models here.

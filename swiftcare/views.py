@@ -1,7 +1,7 @@
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect
-from swiftcare.models import Client
+from swiftcare.models import Patient
 from django.contrib import messages
 from .forms import RegisterForm,CustomLoginForm
 
@@ -39,7 +39,7 @@ def login_page(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('/')  # Redirect to the home page after successful login
+            return redirect('details')  # Redirect to the home page after successful login
     else:
         form = CustomLoginForm()
 
@@ -47,6 +47,28 @@ def login_page(request):
 
 
 def patient_details(request):
+    if request.method == 'POST':
+        patient_name = request.POST.get('patient_name')
+        patient_dob = request.POST.get('patient_dob')
+        patient_gender = request.POST.get('patient_gender')
+        patient_bloodGroup = request.POST.get('patient_bloodGroup')
+        patient_disability = request.POST.get('patient_disability')
+        patient_contact = request.POST.get('patient_contact')
+
+        patient=Patient(
+            patient_name=patient_name,
+            patient_dob=patient_dob,
+            patient_gender=patient_gender,
+            patient_bloodGroup=patient_bloodGroup,
+            patient_disability=patient_disability,
+            patient_contact=patient_contact
+        )
+
+        patient.save()
+        # return redirect('patient_details')
+
+
+
     return render(request,'patient_details.html')
 
 

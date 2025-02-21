@@ -29,6 +29,7 @@
 
   <!-- Main CSS File -->
   <link href="{%  static 'assets/css/main.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/patients_details.css' %}">
 
 
 </head>
@@ -83,8 +84,9 @@
       <h3>Patient Details</h3> <br><br>
 
 
-      <div class="col-lg-5">
-      <form action="">
+      <div class="details col-lg-4">
+      <form action="/details/" method="POST"><br><br>
+          {% csrf_token %}
           <label  for="">Name</label> <br>
           <input class=" col-md-2 form-control" type="text" placeholder="Enter full name" required name="patient_name"> <br><br>
 
@@ -122,8 +124,8 @@
           <input class=" col-md-2 form-control" type="number" required name="patient_contact"> <br><br>
 
 
-          <button type="submit">Submit</button>
-          <button type="reset">Back</button>
+          <button class="btn3" type="submit">Submit</button>
+          <button class="btn3" type="reset">Back</button>
 
 
 
@@ -131,8 +133,69 @@
 
 
 </div>
+      <br><br>
 
   </main>
+  <footer id="footer" class="footer light-background">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">Swiftcare</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>Tom Mboya Street</p>
+            <p>Nairobi, 00100</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+254 712345678</span></p>
+            <p><strong>Email:</strong> <span>info@swiftcare.com</span></p>
+          </div>
+          <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#">Cardiology</a></li>
+            <li><a href="#">Radiology</a></li>
+            <li><a href="#">Neurology</a></li>
+            <li><a href="#">Mental Health</a></li>
+            <li><a href="#">Oncology</a></li>
+            <li><a href="#">Osteology</a></li>
+
+          </ul>
+        </div>
+
+
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">Swiftcare</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+
+        Designed by <a href="https://stemiotsoftwares.onrender.com/">Stemiot Softwares</a>
+      </div>
+    </div>
+
+  </footer>
 
 
 
