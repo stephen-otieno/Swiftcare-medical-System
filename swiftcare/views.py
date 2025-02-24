@@ -1,7 +1,7 @@
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect
-from swiftcare.models import Patient
+from swiftcare.models import Patient,Doctor
 from django.contrib import messages
 from .forms import RegisterForm,CustomLoginForm
 
@@ -70,5 +70,26 @@ def patient_details(request):
 
 
     return render(request,'patient_details.html')
+
+
+def doctor_details(request):
+    if request.method == 'POST':
+        doctor_name = request.POST.get('doctor_name')
+        doctor_email = request.POST.get('doctor_email')
+        doctor_contact = request.POST.get('doctor_contact')
+        doctor_specialization = request.POST.get('doctor_specialization')
+        doctor_availability = request.POST.get('doctor_availability')
+
+        doctor = Doctor(
+            doctor_name=doctor_name,
+            doctor_email=doctor_email,
+            doctor_contact=doctor_contact,
+            doctor_specialization=doctor_specialization,
+            doctor_availability=doctor_availability
+        )
+        doctor.save()
+
+
+    return render(request,'doctors_details.html')
 
 

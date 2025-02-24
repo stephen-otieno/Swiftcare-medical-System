@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Swiftcare</title>
+  <title>Swiftcare-Doctors Details</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -31,24 +31,21 @@
   <link href="{%  static 'assets/css/main.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'assets/css/patients_details.css' %}">
 
-{#     <style>#}
-{##}
-{##}
-{##}
-{#        body {#}
-{##}
-{##}
-{#            background-image:  url("{% static 'assets/img/details-bg.jpg' %} " );#}
-{#            background-size: cover;#}
-{#            background-repeat: no-repeat;#}
-{#            background-position: center;#}
-{##}
-{#            height: 100vh;#}
-{#            width: 100%;#}
-{#        }#}
-{##}
-{##}
-{#     </style>#}
+     <style>
+
+
+
+        body {
+
+
+            background-image:  url("{% static 'assets/img/hero-bg.jpg' %} " );
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+
+     </style>
 
 
 </head>
@@ -100,140 +97,68 @@
 
   <main class="container">
 
-      <h3>Patient Details</h3> <br>
+      <h3>Doctor's Details</h3> <br><br>
 
-          <!-- About Section -->
 
-      <div class="container">
-
-        <div class="row gy-4 gx-5">
-
-          <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="200">
-
-              <div class="details col-lg-8">
-               <form action="/patient_details/" method="POST"><br><br>
+      <div class="details col-lg-4">
+      <form action="/doctor_details/" method="POST"><br><br>
           {% csrf_token %}
           <label  for="">Name</label> <br>
-          <input class=" col-md-2 form-control" type="text" placeholder="Enter full name" required name="patient_name"> <br><br>
+          <input class=" col-md-2 form-control" type="text" placeholder="Enter full name" required name="doctor_name"> <br><br>
 
-          <label for="">Date Of Birth</label> <br>
-          <input type="date" required name="patient_dob"> <br><br>
+          <label for="">Email</label><br>
+          <input class=" col-md-2 form-control" type="email" name="doctor_email" required placeholder="abc123@gmail.com"> <br><br>
 
-          <label for="">Gender</label> <br>
-          <select name="patient_gender" >
-              <option class=" col-md-2 form-control" value="">Select Gender</option>
-              <option value="M">Male</option>
-              <option value="F">Female</option>
-              <option value="O">Other</option>
-
-          </select> <br> <br>
-
-          <label for="">Blood Group</label><br>
-           <select name="patient_bloodGroup" id="Select gender">
-              <option value="">Blood Group</option>
-              <option value="A+">A+</option>
-              <option value="A-">A-</option>
-              <option value="B+">B+</option>
-              <option value="B-">B-</option>
-              <option value="AB+">AB+</option>
-              <option value="AB-">AB-</option>
-              <option value="O+">O+</option>
-              <option value="O-">O-</option>
-
-
-          </select> <br> <br>
-
-          <label for="">Disability</label> <br>
-          <input class=" col-md-2 form-control" type="text" required name="patient_disability"> <br><br>
 
           <label for="">Phone Number</label> <br>
-          <input class=" col-md-2 form-control" type="number" required name="patient_contact"> <br>
+          <input class=" col-md-2 form-control" type="number" required name="doctor_contact"> <br><br>
+
+          <label for="">Specialization</label> <br>
+          <select name="doctor_specialization" id="">
+              <option value="Specialization">Specialization</option>
+              <option value="Cardiology">Cardiology</option>
+              <option value="Radiology">Radiology</option>
+              <option value="Neurology">Neurology</option>
+              <option value="Mental Health">Mental Health</option>
+              <option value="Oncology">Oncology</option>
+              <option value="Osteology">Osteology</option>
+
+
+          </select> <br><br>
+
+
+           <label for="">Availability</label> <br>
+          <select name="doctor_availability" id="">
+              <option value="Availability">Availability</option>
+
+              <option value="">7am-1pm</option>
+              <option value="">1pm-6pm</option>
+              <option value="">6pm-9pm</option>
+              <option value="">9pm-7am</option>
+
+
+          </select> <br><br>
+
+
+
+
+
+{#          <label for="">Disability</label> <br>#}
+{#          <input class=" col-md-2 form-control" type="text" required name="patient_disability"> <br><br>#}
+{##}
+
+
 
           <button class="btn3" type="submit">Submit</button>
           <button class="btn3" type="reset">Back</button>
 
 
+
       </form>
-              </div>  <br><br>
 
 
-          </div>
-
-
-          <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-       <h4>Welcome to Our Patient Registration Portal</h4>
-           <p style="color: black; font-size: large"> Your health is our top priority. At Swiftcare, we are committed to providing exceptional medical care with compassion and professionalism.
-               By registering with us, you gain access to a network of experienced doctors, state-of-the-art facilities, and personalized healthcare services tailored to your needs.
-               Our hospital ensures a seamless and confidential patient experience, from consultation to treatment. Whether you're booking an appointment, accessing medical records,
-               or receiving specialized care, we strive to make your journey toward better health smooth and hassle-free.
-               Please fill out the registration form with accurate details to help us serve you better. Your information will be securely stored and used only for medical purposes.
-               <b>Welcome to quality healthcare you can trust!</b></p>
-
-
-
-        </div>
-
-
-      </div>
-
-    </div><!-- /About Section -->
-
-
-
-
-
-
-
-{#      <div class="details col-lg-4">#}
-{#      <form action="/patient_details/" method="POST"><br><br>#}
-{#          {% csrf_token %}#}
-{#          <label  for="">Name</label> <br>#}
-{#          <input class=" col-md-2 form-control" type="text" placeholder="Enter full name" required name="patient_name"> <br><br>#}
-{##}
-{#          <label for="">Date Of Birth</label> <br>#}
-{#          <input type="date" required name="patient_dob"> <br><br>#}
-{##}
-{#          <label for="">Gender</label> <br>#}
-{#          <select name="patient_gender" >#}
-{#              <option class=" col-md-2 form-control" value="">Select Gender</option>#}
-{#              <option value="M">Male</option>#}
-{#              <option value="F">Female</option>#}
-{#              <option value="O">Other</option>#}
-{#              #}
-{#          </select> <br> <br>#}
-{##}
-{#          <label for="">Blood Group</label><br>#}
-{#           <select name="patient_bloodGroup" id="Select gender">#}
-{#              <option value="">Blood Group</option>#}
-{#              <option value="A+">A+</option>#}
-{#              <option value="A-">A-</option>#}
-{#              <option value="B+">B+</option>#}
-{#              <option value="B-">B-</option>#}
-{#              <option value="AB+">AB+</option>#}
-{#              <option value="AB-">AB-</option>#}
-{#              <option value="O+">O+</option>#}
-{#              <option value="O-">O-</option>#}
-{##}
-{##}
-{#          </select> <br> <br>#}
-{##}
-{#          <label for="">Disability</label> <br>#}
-{#          <input class=" col-md-2 form-control" type="text" required name="patient_disability"> <br><br>#}
-{##}
-{#          <label for="">Phone Number</label> <br>#}
-{#          <input class=" col-md-2 form-control" type="number" required name="patient_contact"> <br><br>#}
-{##}
-{##}
-{#          <button class="btn3" type="submit">Submit</button>#}
-{#          <button class="btn3" type="reset">Back</button>#}
-{##}
-{##}
-{##}
-{#      </form>#}
-{##}
-{##}
-{#</div>#}
-{#      <br><br>#}
+</div>
+      <br><br>
 
   </main>
   <footer id="footer" class="footer light-background">
