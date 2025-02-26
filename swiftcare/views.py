@@ -93,3 +93,7 @@ def doctor_details(request):
     return render(request,'doctors_details.html')
 
 
+def doctors(request):
+    return render(request,'doctors.html')
+
+
