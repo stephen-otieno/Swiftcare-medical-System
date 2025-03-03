@@ -33,6 +33,7 @@ class Patient(models.Model):
 
 
 class Doctor(models.Model):
+    doctor_image = models.ImageField(upload_to='doctors/')
     doctor_name = models.CharField(max_length=100)
     doctor_email = models.EmailField()
     doctor_contact = models.CharField(max_length=50)

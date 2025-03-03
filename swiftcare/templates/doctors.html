@@ -81,120 +81,131 @@
 
 <main>
 
-     <!-- Doctors Section -->
-    <section id="doctors" class="doctors section">
+<div class="container m-3 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="row justify-content-center g-3">
+        {% for doctor in doctors %}
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Doctors</h2>
-        <p>Meet our team of highly skilled and compassionate doctors dedicated to providing exceptional healthcare and personalized treatment</p>
-      </div><!-- End Section Title -->
+            <div class="col-md-4">
+                <div class="card m-3" style="min-width: 250px; max-width: 350px;">
+                    <div class="card-body text-center">
+                        <img src="{{ doctor.doctor_image.url }}" class="img-fluid rounded" alt="Doctor Image" style="width: 100%; max-height: 200px; object-fit: cover;">
+{#                        <div class="card-body">#}
+                             <p><b>Name:</b> {{ doctor.doctor_name }}</p>
+                        <p><b>Specialization:</b> {{ doctor.doctor_specialization }}</p>
 
-      <div class="container">
+{#                        </div>#}
 
-        <div class="row gy-4">
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="team-member d-flex align-items-start">
-              <div class="pic"><img src="{% static 'assets/img/doctors/doctors-1.jpg' %}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Cardiology</span>
-
-                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Profile</button>
-                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Schedule</button>
-                  <br> <br>
-                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none;  margin-left: .5cm">Appointment</button>
-
-
-              </div>
+                    </div>
+                </div>
             </div>
-          </div><!-- End Team Member -->
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="team-member d-flex align-items-start">
-              <div class="pic"><img src="{% static 'assets/img/doctors/doctors-2.jpg' %}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Radiology</span>
-                     <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Profile</button>
-                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Schedule</button>
-                  <br> <br>
-                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none;  margin-left: .5cm">Appointment</button>
-
-
-              </div>
-            </div>
-          </div><!-- End Team Member -->
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="team-member d-flex align-items-start">
-              <div class="pic"><img src="{% static 'assets/img/doctors/doctors-3.jpg' %}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>Neurology</span>
-                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Profile</button>
-                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Schedule</button>
-                  <br> <br>
-                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none;  margin-left: .5cm">Appointment</button>
-
-              </div>
-            </div>
-          </div><!-- End Team Member -->
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="team-member d-flex align-items-start">
-              <div class="pic"><img src="{% static 'assets/img/doctors/doctors-4.jpg' %}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Amanda Jepson</h4>
-                <span>Mental Health</span>
-                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Profile</button>
-                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Schedule</button>
-                  <br> <br>
-                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none;  margin-left:.5cm">Appointment</button>
-
-              </div>
-            </div>
-          </div><!-- End Team Member -->
-
-             <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="team-member d-flex align-items-start">
-              <div class="pic"><img src="{% static 'assets/img/doctors/doctors-3.jpg' %}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>Oncology</span>
-                 <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Profile</button>
-                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Schedule</button>
-                  <br> <br>
-                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none;  margin-left: .5cm">Appointment</button>
-
-              </div>
-            </div>
-          </div><!-- End Team Member -->
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="team-member d-flex align-items-start">
-              <div class="pic"><img src="{% static 'assets/img/doctors/doctors-4.jpg' %}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Amanda Jepson</h4>
-                <span>Osteology</span>
-                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Profile</button>
-                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Schedule</button>
-                  <br> <br>
-                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none; margin-left: .5cm">Appointment</button>
-
-              </div>
-            </div>
-          </div><!-- End Team Member -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Doctors Section -->
-
+        {% endfor %}
+    </div>
+</div>
 
 </main>
+
+  {#      <div class="container">#}
+{##}
+{#        <div class="row gy-4">#}
+{##}
+{#          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">#}
+{#            <div class="team-member d-flex align-items-start">#}
+{#              <div class="pic"><img src="{% static 'assets/img/doctors/doctors-1.jpg' %}" class="img-fluid" alt=""></div>#}
+{#              <div class="member-info">#}
+{#                <h4>Walter White</h4>#}
+{#                <span>Cardiology</span>#}
+{##}
+{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Profile</button>#}
+{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Schedule</button>#}
+{#                  <br> <br>#}
+{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none;  margin-left: .5cm">Appointment</button>#}
+{##}
+{##}
+{#              </div>#}
+{#            </div>#}
+{#          </div><!-- End Team Member -->#}
+{##}
+{#          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">#}
+{#            <div class="team-member d-flex align-items-start">#}
+{#              <div class="pic"><img src="{% static 'assets/img/doctors/doctors-2.jpg' %}" class="img-fluid" alt=""></div>#}
+{#              <div class="member-info">#}
+{#                <h4>Sarah Jhonson</h4>#}
+{#                <span>Radiology</span>#}
+{#                     <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Profile</button>#}
+{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Schedule</button>#}
+{#                  <br> <br>#}
+{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none;  margin-left: .5cm">Appointment</button>#}
+{##}
+{##}
+{#              </div>#}
+{#            </div>#}
+{#          </div><!-- End Team Member -->#}
+{##}
+{#          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">#}
+{#            <div class="team-member d-flex align-items-start">#}
+{#              <div class="pic"><img src="{% static 'assets/img/doctors/doctors-3.jpg' %}" class="img-fluid" alt=""></div>#}
+{#              <div class="member-info">#}
+{#                <h4>William Anderson</h4>#}
+{#                <span>Neurology</span>#}
+{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Profile</button>#}
+{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Schedule</button>#}
+{#                  <br> <br>#}
+{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none;  margin-left: .5cm">Appointment</button>#}
+{##}
+{#              </div>#}
+{#            </div>#}
+{#          </div><!-- End Team Member -->#}
+{##}
+{#          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">#}
+{#            <div class="team-member d-flex align-items-start">#}
+{#              <div class="pic"><img src="{% static 'assets/img/doctors/doctors-4.jpg' %}" class="img-fluid" alt=""></div>#}
+{#              <div class="member-info">#}
+{#                <h4>Amanda Jepson</h4>#}
+{#                <span>Mental Health</span>#}
+{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Profile</button>#}
+{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Schedule</button>#}
+{#                  <br> <br>#}
+{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none;  margin-left:.5cm">Appointment</button>#}
+{##}
+{#              </div>#}
+{#            </div>#}
+{#          </div><!-- End Team Member -->#}
+{##}
+{#             <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">#}
+{#            <div class="team-member d-flex align-items-start">#}
+{#              <div class="pic"><img src="{% static 'assets/img/doctors/doctors-3.jpg' %}" class="img-fluid" alt=""></div>#}
+{#              <div class="member-info">#}
+{#                <h4>William Anderson</h4>#}
+{#                <span>Oncology</span>#}
+{#                 <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Profile</button>#}
+{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Schedule</button>#}
+{#                  <br> <br>#}
+{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none;  margin-left: .5cm">Appointment</button>#}
+{##}
+{#              </div>#}
+{#            </div>#}
+{#          </div><!-- End Team Member -->#}
+{##}
+{#          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">#}
+{#            <div class="team-member d-flex align-items-start">#}
+{#              <div class="pic"><img src="{% static 'assets/img/doctors/doctors-4.jpg' %}" class="img-fluid" alt=""></div>#}
+{#              <div class="member-info">#}
+{#                <h4>Amanda Jepson</h4>#}
+{#                <span>Osteology</span>#}
+{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Profile</button>#}
+{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Schedule</button>#}
+{#                  <br> <br>#}
+{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none; margin-left: .5cm">Appointment</button>#}
+{##}
+{#              </div>#}
+{#            </div>#}
+{#          </div><!-- End Team Member -->#}
+{##}
+{#        </div>#}
+{##}
+{#      </div>#}
+{##}
+{#    </section><!-- /Doctors Section -->#}
 
 
 

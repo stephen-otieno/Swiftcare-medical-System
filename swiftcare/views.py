@@ -79,13 +79,15 @@ def doctor_details(request):
         doctor_contact = request.POST.get('doctor_contact')
         doctor_specialization = request.POST.get('doctor_specialization')
         doctor_availability = request.POST.get('doctor_availability')
+        doctor_image = request.POST.get('doctor_image')
 
         doctor = Doctor(
             doctor_name=doctor_name,
             doctor_email=doctor_email,
             doctor_contact=doctor_contact,
             doctor_specialization=doctor_specialization,
-            doctor_availability=doctor_availability
+            doctor_availability=doctor_availability,
+            doctor_image=doctor_image
         )
         doctor.save()
 
@@ -93,7 +95,8 @@ def doctor_details(request):
     return render(request,'doctors_details.html')
 
 
-def doctors(request):
-    return render(request,'doctors.html')
+def view_doctors(request):
+    doctors = Doctor.objects.all()
+    return render(request,'doctors.html',{'doctors':doctors})
 
 
