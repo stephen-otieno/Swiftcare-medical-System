@@ -33,7 +33,6 @@ class Patient(models.Model):
 
 
 class Doctor(models.Model):
-    doctor_image = models.ImageField(upload_to='doctors/')
     doctor_name = models.CharField(max_length=100)
     doctor_email = models.EmailField()
     doctor_contact = models.CharField(max_length=50)
@@ -59,6 +58,8 @@ class Doctor(models.Model):
 
     ]
     doctor_availability = models.CharField(max_length=50, choices=AVAILABILITY_CHOICES, default='7am-1pm')
+    doctor_image = models.ImageField(upload_to='doctors/')
+
 
     def __str__(self):
             return f"{self.doctor_name}"

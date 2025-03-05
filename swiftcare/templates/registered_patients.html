@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Swiftcare-Doctors Details</title>
+  <title>Swiftcare</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -29,23 +29,6 @@
 
   <!-- Main CSS File -->
   <link href="{%  static 'assets/css/main.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'assets/css/patients_details.css' %}">
-
-     <style>
-
-
-
-        body {
-
-
-            background-image:  url("{% static 'assets/img/hero-bg.jpg' %} " );
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-
-
-     </style>
 
 
 </head>
@@ -53,7 +36,10 @@
 <body class="index-page">
 
   <header id="header" class="header sticky-top">
-        <div class="branding d-flex align-items-center">
+
+
+
+    <div class="branding d-flex align-items-center">
 
       <div class="container position-relative d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center me-auto">
@@ -63,13 +49,13 @@
 
         <nav id="navmenu" class="navmenu">
           <ul>
-            <li><a href="{% url 'homepage' %}" class="active">Home<br></a></li>
+            <li><a href="#hero" class="active">Home<br></a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#doctors">Doctors</a></li>
+            <li><a href="{% url 'doctors' %}">Doctors</a></li>
             <li class="dropdown"><a href="#"><span>Departments</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
               <ul>
-                <li><a href="#">Cardiology</a></li>
+                 <li><a href="#">Cardiology</a></li>
                 <li><a href="#">Radiology</a></li>
                 <li><a href="#">Neurology</a></li>
                 <li><a href="#">Mental Health</a></li>
@@ -80,9 +66,8 @@
 
               </ul>
             </li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+          </ul>
         </nav>
 
         <a class="cta-btn d-none d-sm-block" href="#appointment">Make an Appointment</a>
@@ -94,76 +79,56 @@
 
   </header>
 
-
-  <main class="container">
-
-      <h3>Doctor's Details</h3> <br><br>
+  <main class="main">
+  <br><br><br><br><br>
 
 
-      <div class="details col-lg-4">
-      <form action="/doctor_details/" method="POST" enctype="multipart/form-data"><br><br>
-          {% csrf_token %}
-          <label  for="">Name</label> <br>
-          <input class=" col-md-2 form-control" type="text" placeholder="Enter full name" required name="doctor_name"> <br><br>
-
-          <label for="">Email</label><br>
-          <input class=" col-md-2 form-control" type="email" name="doctor_email" required placeholder="abc123@gmail.com"> <br><br>
+  <div class="container"><br>
 
 
-          <label for="">Phone Number</label> <br>
-          <input class=" col-md-2 form-control" type="number" required name="doctor_contact"> <br><br>
+      <h3>Patients' Data</h3>
 
-          <label for="">Specialization</label> <br>
-          <select name="doctor_specialization" id="">
-              <option value="Specialization">Specialization</option>
-              <option value="Cardiology">Cardiology</option>
-              <option value="Radiology">Radiology</option>
-              <option value="Neurology">Neurology</option>
-              <option value="Mental Health">Mental Health</option>
-              <option value="Oncology">Oncology</option>
-              <option value="Osteology">Osteology</option>
+      <table class="table table-bordered table-hover  table-primary"><br>
+
+   <th>ID</th>
+        <th>Name</th>
+        <th>Date Of Birth</th>
+        <th>Gender</th>
+      <th>Blood Group</th>
+      <th>Disability</th>
+      <th>Contact</th>
+      <th>Date Visited</th>
+
+          {% for patient in patients %}
+
+               <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ patient.patient_name }}</td>
+        <td>{{ patient.patient_dob }}</td>
+        <td>{{ patient.patient_gender }}</td>
+        <td>{{ patient.patient_bloodGroup }}</td>
+        <td>{{ patient.patient_disability }}</td>
+        <td>{{ patient.patient_contact }}</td>
+        <td>{{ patient.filled_at|date:"F j, Y" }}</td>
 
 
-          </select> <br><br>
+    </tr>
 
 
-           <label for="">Availability</label> <br>
-          <select name="doctor_availability" id="">
-              <option value="Availability">Availability</option>
-
-              <option value="">7am-1pm</option>
-              <option value="">1pm-6pm</option>
-              <option value="">6pm-9pm</option>
-              <option value="">9pm-7am</option>
+          {% endfor %}
 
 
-          </select> <br><br>
 
-           <div class="col-md-12 ">
-                <label> <b>Profile Picture</b>
-                     <input type="file" class="form-control" name="doctor_image" required >
-                </label> <br><br>
+</table>
+
+  </div>
 
 
 
 
 
+       </main>
 
-
-
-
-          <button class="btn3" type="submit">Submit</button>
-          <button class="btn3" type="reset">Back</button>
-
-
-
-      </form>
-
-
-</div>
-      <br><br>
-
-  </main>
   <footer id="footer" class="footer light-background">
 
     <div class="container footer-top">
@@ -224,9 +189,6 @@
     </div>
 
   </footer>
-
-
-
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
