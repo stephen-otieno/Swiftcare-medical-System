@@ -31,6 +31,97 @@
   <link href="{%  static 'assets/css/main.css' %}" rel="stylesheet">
 
 
+   <style>
+    /* Hide extra details by default */
+    .extra-details {
+        display: none;
+    }
+
+    /* Expanded Card Styles */
+    .doctor-card.expanded {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50vw;
+        height: 95vh;
+        background: white;
+        z-index: 1000;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        transition: all 0.3s ease-in-out;
+        border-radius: 15px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Show extra details when expanded */
+    .doctor-card.expanded .extra-details {
+        display: block;
+    }
+
+    /* Make Image Bigger in Expanded View */
+    .doctor-card.expanded .doctor-image {
+        max-width: 300px;
+        width: 100%;
+        height: auto;
+        border-radius: 50%;
+        margin-bottom: 15px;
+    }
+
+    /* Prevent background scrolling */
+    .no-scroll {
+        overflow: hidden;
+    }
+
+    /* Styled Profile Button */
+    .profile-btn {
+        background-color: #1977cc;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: background 0.3s ease-in-out;
+    }
+    /* Hide Profile Button when Card is Expanded */
+.doctor-card.expanded .profile-btn {
+    display: none;
+}
+
+
+    .profile-btn:hover {
+        background-color: #135ca1;
+    }
+
+    /* Styled Close Button (Initially Hidden) */
+    .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: red;
+        color: white;
+        border: none;
+        font-size: 24px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        display: none; /* Hidden initially */
+        align-items: center;
+        justify-content: center;
+    }
+
+    .close-btn:hover {
+        background: darkred;
+    }
+</style>
+
+
+
 </head>
 
 <body class="index-page">
@@ -67,6 +158,8 @@
               </ul>
             </li>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+
+          </ul>
         </nav>
 
         <a class="cta-btn d-none d-sm-block" href="#appointment">Make an Appointment</a>
@@ -84,28 +177,36 @@
 <div class="container m-3 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
     <div class="row justify-content-center g-3">
         {% for doctor in doctors %}
-
             <div class="col-md-4">
-                <div class="card m-3" style="min-width: 250px; max-width: 350px;">
+                <div class="card doctor-card m-3">
                     <div class="card-body text-center">
-               {% if doctor.doctor_image %}
-        <img src="{{ doctor.doctor_image.url }}" class="img-fluid rounded" alt="Doctor Image">
-        {% else %}
-        <img src="/media/doctors/default.jpg" class="img-fluid rounded" alt="Default Doctor Image">
-         {% endif %}
+                        {% if doctor.doctor_image %}
+                            <img src="{{ doctor.doctor_image.url }}" class="img-fluid rounded doctor-image" alt="Doctor Image">
+                        {% else %}
+                            <img src="/media/doctors/default.jpg" class="img-fluid rounded doctor-image" alt="Default Doctor Image">
+                        {% endif %}
 
-                             <p><b>Name:</b> {{ doctor.doctor_name }}</p>
-                        <p><b>Specialization:</b> {{ doctor.doctor_specialization }}</p>
+                        <h5 class="doctor-name">{{ doctor.doctor_name }}</h5>
+                        <p class="doctor-specialization"><b>Specialization:</b> {{ doctor.doctor_specialization }}</p>
 
-{#                        </div>#}
+                        <!-- Extra details initially hidden -->
+                        <div class="extra-details">
+                            <p><b>Phone:</b> {{ doctor.doctor_contact }}</p>
+                            <p><b>Email:</b> {{ doctor.doctor_email }}</p>
+                            <p><b>Availability:</b> {{ doctor.doctor_availability|default:"Not Available" }}</p>
+                        </div>
 
+                        <!-- Toggle Button -->
+                        <button class="btn profile-btn">View Profile</button>
+
+                        <!-- Close Button (Initially Hidden) -->
+                        <button class="btn close-btn">×</button>
                     </div>
                 </div>
             </div>
         {% endfor %}
     </div>
 </div>
-
 </main>
 
   {#      <div class="container">#}
@@ -289,6 +390,37 @@
   <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
 
   <!-- Main JS File -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".profile-btn").forEach(button => {
+            button.addEventListener("click", function () {
+                let card = this.closest(".doctor-card");
+
+                // Collapse other cards before expanding the clicked one
+                document.querySelectorAll(".doctor-card").forEach(otherCard => {
+                    otherCard.classList.remove("expanded");
+                    otherCard.querySelector(".close-btn").style.display = "none";
+                });
+
+                // Expand clicked card
+                document.body.classList.add("no-scroll");
+                card.classList.add("expanded");
+                card.querySelector(".close-btn").style.display = "block";
+            });
+        });
+
+        document.querySelectorAll(".close-btn").forEach(button => {
+            button.addEventListener("click", function () {
+                let card = this.closest(".doctor-card");
+                document.body.classList.remove("no-scroll");
+                card.classList.remove("expanded");
+                this.style.display = "none"; // Hide close button
+            });
+        });
+    });
+</script>
+
+
   <script src="{% static 'assets/js/main.js' %}"></script>
 
 </body>
