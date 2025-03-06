@@ -31,7 +31,7 @@ urlpatterns = [
     path('doctor_details/',views.doctor_details,name='doctor_details'),
     path('doctors/',views.view_doctors,name='doctors'),
 
-    path('registered_patients',views.registered_patients,name='registered_patients'),
+    path('registered_patients/',views.registered_patients,name='registered_patients'),
 ]
 
 if settings.DEBUG:

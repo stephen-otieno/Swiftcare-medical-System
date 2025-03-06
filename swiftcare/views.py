@@ -65,10 +65,6 @@ def patient_details(request):
         )
 
         patient.save()
-        # return redirect('patient_details')
-
-
-
     return render(request,'patient_details.html')
 
 
