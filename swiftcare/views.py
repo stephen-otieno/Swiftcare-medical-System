@@ -39,13 +39,14 @@ def login_page(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('details')  # Redirect to the home page after successful login
+            return redirect('homepage')  # Redirect to the home page after successful login
     else:
         form = CustomLoginForm()
 
     return render(request, 'login.html',{'form':form})
 
 
+@login_required(login_url='login')
 def patient_details(request):
     if request.method == 'POST':
         patient_name = request.POST.get('patient_name')
@@ -91,10 +92,14 @@ def doctor_details(request):
     return render(request,'doctors_details.html')
 
 
+
+
 def view_doctors(request):
     doctors = Doctor.objects.all()
     return render(request,'doctors.html',{'doctors':doctors})
 
+
+@login_required(login_url='login')
 def registered_patients(request):
     patients = Patient.objects.all()
     return render(request,'registered_patients.html',{'patients':patients})
