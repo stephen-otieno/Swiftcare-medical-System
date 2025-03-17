@@ -54,8 +54,6 @@ class Doctor(models.Model):
         ('6pm-9pm', '6pm-9pm'),
         ('9pm-7am', '9pm-7am'),
 
-
-
     ]
     doctor_availability = models.CharField(max_length=50, choices=AVAILABILITY_CHOICES, default='7am-1pm')
     doctor_image = models.ImageField(upload_to='doctors/')
@@ -63,6 +61,54 @@ class Doctor(models.Model):
 
     def __str__(self):
             return f"{self.doctor_name}"
+
+
+
+class Medicine(models.Model):
+    medicine_name = models.CharField(max_length=100)
+    medicine_quantity = models.IntegerField()
+
+    CATEGORY_CHOICES = [
+        ('Antibiotics', 'Antibiotics'),
+        ('Painkillers', 'Painkillers'),
+        ('Antivirals', 'Antivirals'),
+        ('Antiseptics', 'Antiseptics'),
+        ('Vaccine', 'Vaccine'),
+        ('Vitamin', 'Vitamin'),
+
+    ]
+    medicine_category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='Antibiotics')
+
+    PRESCRIPTION_CHOICES = [
+        ('1×3', '1×3'),
+        ('2×3', '2×3'),
+        ('2×2', '2×2'),
+        ('5ml×2', '5ml×2'),
+        ('5ml×3', '5ml×3'),
+        ('10ml×2', '10ml×2'),
+        ('10ml×3', '10ml×3'),
+
+    ]
+    medicine_prescription = models.CharField(max_length=50, choices=PRESCRIPTION_CHOICES, default='1×3')
+
+    DURATION_CHOICES = [
+        ('5 weeks', '5 weeks'),
+        ('4 weeks', '4 weeks'),
+        ('3 weeks', '3 weeks'),
+        ('2 weeks', '2 weeks'),
+        ('1 week', '1 week'),
+
+    ]
+    medicine_duration = models.CharField(max_length=50, choices=DURATION_CHOICES, default='5 weeks')
+
+    medicine_image = models.ImageField(upload_to='medicines/')
+    medicine_price = models.IntegerField()
+
+
+
+    def __str__(self):
+            return f"{self.medicine_name}"
+
 
 
 

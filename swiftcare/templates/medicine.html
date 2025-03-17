@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Swiftcare</title>
+  <title>Swiftcare-Doctors Details</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -28,27 +28,25 @@
   <link href="{%  static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link href="{%  static 'assets/css/main.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'assets/css/patients_details.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/patients_details.css' %}">
 
-{#     <style>#}
-{##}
-{##}
-{##}
-{#        body {#}
-{##}
-{##}
-{#            background-image:  url("{% static 'assets/img/details-bg.jpg' %} " );#}
-{#            background-size: cover;#}
-{#            background-repeat: no-repeat;#}
-{#            background-position: center;#}
-{##}
-{#            height: 100vh;#}
-{#            width: 100%;#}
-{#        }#}
-{##}
-{##}
-{#     </style>#}
+  <link href="{%  static 'assets/css/main.css' %}" rel="stylesheet">
+
+     <style>
+
+
+
+        body {
+
+
+            background-image:  url("{% static 'assets/img/hero-bg.jpg' %} " );
+            background-size: cover;
+            background-repeat: no-repeat;
+            {#background-position: center;#}
+        }
+
+
+     </style>
 
 
 </head>
@@ -100,87 +98,81 @@
 
   <main class="container">
 
-      <h3>Patient Details</h3> <br>
+      <h3>Medine Details</h3> <br><br>
 
-          <!-- About Section -->
 
-      <div class="container">
-
-        <div class="row gy-4 gx-5">
-
-          <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="200">
-
-              <div class="details col-lg-8">
-               <form action="/patient_details/" method="POST"><br><br>
+      <div class="details col-lg-4">
+      <form  action="/medicine_details/" method="POST" enctype="multipart/form-data"><br>
           {% csrf_token %}
           <label  for="">Name</label> <br>
-          <input class=" col-md-2 form-control" type="text" placeholder="Enter full name" required name="patient_name"> <br><br>
+          <input class=" col-md-2 form-control" type="text"  required name="medicine_name"> <br>
 
-          <label for="">Date Of Birth</label> <br>
-          <input type="date" required name="patient_dob"> <br><br>
+          <label for="">Quantity</label><br>
+          <input class=" col-md-2 form-control" type="number" name="medicine_quantity" required placeholder="Number of cartons"> <br>
 
-          <label for="">Gender</label> <br>
-          <select name="patient_gender" >
-              <option class=" col-md-2 form-control" value="">Select Gender</option>
-              <option value="M">Male</option>
-              <option value="F">Female</option>
-              <option value="O">Other</option>
+               <label for="">Category</label> <br>
+          <select name="medicine_category" id="">
+              <option value="Duration">Category</option>
 
-          </select> <br> <br>
+              <option value="Antibiotics">Antibiotics</option>
+              <option value="Painkillers">Painkillers</option>
+              <option value="Antivirals">Antivirals</option>
+              <option value="Antiseptics">Antiseptics</option>
+              <option value="Vaccine">Vaccine</option>
+              <option value="Vitamin">Vitamin</option>
 
-          <label for="">Blood Group</label><br>
-           <select name="patient_bloodGroup" id="Select_gender">
-              <option value="">Blood Group</option>
-              <option value="A+">A+</option>
-              <option value="A-">A-</option>
-              <option value="B+">B+</option>
-              <option value="B-">B-</option>
-              <option value="AB+">AB+</option>
-              <option value="AB-">AB-</option>
-              <option value="O+">O+</option>
-              <option value="O-">O-</option>
+          </select> <br><br>
 
 
-          </select> <br> <br>
+          <label for="">Prescription</label> <br>
+          <select name="medicine_prescription" id="">
+              <option value="Prescription">Prescription</option>
+              <option value="1×3">1×3</option>
+              <option value="2×3">2×3</option>
+              <option value="2×2">2×2</option>
+              <option value="5ml×2">5ml×2</option>
+              <option value="5ml×3">5ml×3</option>
+              <option value="10ml×2">10ml×2</option>
+              <option value="10ml×3">10ml×3</option>
 
-          <label for="">Disability</label> <br>
-          <input class=" col-md-2 form-control" type="text" required name="patient_disability"> <br><br>
 
-          <label for="">Phone Number</label> <br>
-          <input class=" col-md-2 form-control" type="number" required name="patient_contact"> <br>
+          </select> <br><br>
+
+
+           <label for="">Duration</label> <br>
+          <select name="medicine_duration" id="">
+              <option value="Duration">Duration</option>
+
+              <option value="5 weeks">5 weeks</option>
+              <option value="4 weeks">4 weeks</option>
+              <option value="3 weeks">3 weeks</option>
+              <option value="2 weeks">2 weeks</option>
+              <option value="1 week">1 week</option>
+
+
+
+          </select> <br>
+
+           <label for="">Price</label> <br>
+          <input class=" col-md-2 form-control" type="number" required name="medicine_price"> <br>
+
+           <div class="col-md-12 ">
+                <label> <b>Medicine Image</b>
+                     <input type="file" class="form-control" name="medicine_image" required >
+                </label> <br><br>
+
+
 
           <button class="btn3" type="submit">Submit</button>
           <button class="btn3" type="reset">Back</button>
 
 
+</div>
       </form>
-              </div>  <br><br>
 
 
-          </div>
-
-
-          <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-       <h4>Welcome to Our Patient Registration Portal</h4>
-           <p style="color: black; font-size: large"> Your health is our top priority. At Swiftcare, we are committed to providing exceptional medical care with compassion and professionalism.
-               By registering with us, you gain access to a network of experienced doctors, state-of-the-art facilities, and personalized healthcare services tailored to your needs.
-               Our hospital ensures a seamless and confidential patient experience, from consultation to treatment. Whether you're booking an appointment, accessing medical records,
-               or receiving specialized care, we strive to make your journey toward better health smooth and hassle-free.
-               Please fill out the registration form with accurate details to help us serve you better. Your information will be securely stored and used only for medical purposes.
-               <b>Welcome to quality healthcare you can trust!</b></p>
-
-
-
-        </div>
-
-
-      </div>
-
-    </div><!-- /About Section -->
-
-
-
-
+</div>
+      <br><br>
 
   </main>
   <footer id="footer" class="footer light-background">
@@ -251,7 +243,7 @@
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Preloader -->
-  <div id="preloader"></div>
+{#  <div id="preloader"></div>#}
 
   <!-- Vendor JS Files -->
   <script src="{%  static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
@@ -262,8 +254,4 @@
   <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
 
   <!-- Main JS File -->
-  <script src="{% static 'assets/js/main.js' %}"></script>
-
-</body>
-
-</html>
+  <script src="{% static 'assets/js/main.js' %}"></s

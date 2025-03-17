@@ -1,0 +1,217 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Swiftcare</title>
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/logo1.jpg' %}" rel="icon">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+
+  <style>
+
+
+    .medicine-card {
+    width: 300px ; /* Force width increase */
+    min-width: 300px; /* Ensure it doesn't shrink */
+    height: 400px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out;
+}
+
+
+
+    /* Expanded Card Styles */
+    .medicine-card.expanded {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40vw; /* Increased width */
+        height: auto;
+        background: white;
+        z-index: 1000;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .medicine-card.expanded .extra-details {
+        display: block;
+    }
+
+    .medicine-card.expanded .medicine-image {
+        max-width: 350px;
+        width: 500px;
+        height: auto;
+        border-radius: 15px;
+        margin-bottom: 15px;
+    }
+
+    .extra-details {
+        display: none;
+    }
+
+    .profile-btn {
+        background-color: #1977cc;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-weight: bold;
+    }
+
+    .btn-primary:hover {
+        background-color: #135ca1;
+    }
+
+    .medicine-card.expanded .btn-primary {
+        display: none;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: red;
+        color: white;
+        border: none;
+        font-size: 24px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        display: none;
+    }
+
+    .close-btn:hover {
+        background: darkred;
+    }
+
+  </style>
+</head>
+
+
+<body>
+<header id="header" class="header sticky-top">
+
+
+
+    <div class="branding d-flex align-items-center">
+
+      <div class="container position-relative d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center me-auto">
+           <img src="{% static 'assets/img/logo1.jpg' %}" alt="">
+          <h1 class="sitename">Swiftcare</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="#hero" class="active">Home<br></a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="{% url 'doctors' %}">Doctors</a></li>
+            <li class="dropdown"><a href="#"><span>Departments</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                 <li><a href="#">Cardiology</a></li>
+                <li><a href="#">Radiology</a></li>
+                <li><a href="#">Neurology</a></li>
+                <li><a href="#">Mental Health</a></li>
+                <li><a href="#">Oncology</a></li>
+                <li><a href="#">Osteology</a></li>
+
+              </ul>
+            </li>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+          </ul>
+        </nav>
+
+        <a class="cta-btn d-none d-sm-block" href="#appointment">Make an Appointment</a>
+        <a class="cta-btn d-none d-sm-block" href="{% url 'login' %}">Login</a>
+
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+
+  <main class="main">
+    <div class="container m-3 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+      <div class="row justify-content-center g-3">
+        {% for medicine in medicines %}
+          <div class="col-md-4 ">
+            <div class="card medicine-card m-4">
+              <div class="card-body text-center">
+                {% if medicine.medicine_image %}
+                  <img src="{{ medicine.medicine_image.url }}" class="img-fluid rounded medicine-image" alt="Medicine Image">
+                {% else %}
+                  <img src="/media/medicines/default.jpg" class="img-fluid rounded medicine-image" alt="Default Medicine Image">
+                {% endif %}
+
+                <h5 class="medicine-name">{{ medicine.medicine_name }}</h5>
+                <p class="medicine-price"><b>Price:</b> {{ medicine.medicine_price }}</p>
+
+                <!-- Extra details initially hidden -->
+                <div class="extra-details">
+                  <p><b>Category:</b> {{ medicine.medicine_category }}</p>
+                  <p><b>Prescription:</b> {{ medicine.medicine_prescription }}</p>
+                  <p><b>Duration:</b> {{ medicine.medicine_duration }}</p>
+                </div>
+
+                <!-- Toggle Button -->
+                <button class="btn btn-primary ">Details</button>
+                <button class="btn btn-success btn-sm">Buy</button>
+
+                <!-- Close Button -->
+                <button class="btn close-btn">×</button>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".btn-primary").forEach(button => {
+            button.addEventListener("click", function () {
+                let card = this.closest(".medicine-card");
+
+                // Close other expanded cards before expanding new one
+                document.querySelectorAll(".medicine-card").forEach(otherCard => {
+                    otherCard.classList.remove("expanded");
+                    otherCard.querySelector(".close-btn").style.display = "none";
+                });
+
+                // Expand selected card
+                card.classList.add("expanded");
+                card.querySelector(".close-btn").style.display = "block";
+            });
+        });
+
+        document.querySelectorAll(".close-btn").forEach(button => {
+            button.addEventListener("click", function () {
+                let card = this.closest(".medicine-card");
+                card.classList.remove("expanded");
+                this.style.display = "none";
+            });
+        });
+    });
+  </script>
+</body>
+
+</html>

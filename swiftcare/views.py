@@ -1,7 +1,7 @@
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect
-from swiftcare.models import Patient,Doctor
+from swiftcare.models import Patient,Doctor, Medicine
 from django.contrib import messages
 from .forms import RegisterForm,CustomLoginForm
 
@@ -103,5 +103,35 @@ def view_doctors(request):
 def registered_patients(request):
     patients = Patient.objects.all()
     return render(request,'registered_patients.html',{'patients':patients})
+
+def pharmacy(request):
+    medicines = Medicine.objects.all()
+    return render(request, 'pharmacy.html',{'medicines':medicines})
+
+def medicine(request):
+    if request.method == 'POST':
+        medicine_name = request.POST.get('medicine_name')
+        medicine_quantity = request.POST.get('medicine_quantity')
+        medicine_category = request.POST.get('medicine_category')
+        medicine_prescription = request.POST.get('medicine_prescription')
+        medicine_duration = request.POST.get('medicine_duration')
+        medicine_price = request.POST.get('medicine_price')
+        medicine_image = request.FILES.get('medicine_image')
+
+        medicine = Medicine(
+            medicine_name=medicine_name,
+            medicine_quantity=medicine_quantity,
+            medicine_category=medicine_category,
+            medicine_prescription=medicine_prescription,
+            medicine_duration=medicine_duration,
+            medicine_price=medicine_price,
+            medicine_image=medicine_image
+
+        )
+        medicine.save()
+
+    return render(request, 'medicine.html')
+
+
 
 
