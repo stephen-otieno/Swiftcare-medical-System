@@ -55,8 +55,11 @@
 
 <body class="index-page">
 
-  <header id="header" class="header sticky-top">
-        <div class="branding d-flex align-items-center">
+ <header id="header" class="header sticky-top">
+
+
+
+    <div class="branding d-flex align-items-center">
 
       <div class="container position-relative d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center me-auto">
@@ -67,12 +70,15 @@
         <nav id="navmenu" class="navmenu">
           <ul>
             <li><a href="{% url 'homepage' %}" class="active">Home<br></a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#doctors">Doctors</a></li>
+            <li><a href="{% url 'homepage' %}#services">Services</a></li>
+            <li><a href="{% url 'doctors' %}">Doctors</a></li>
+              {% if user.is_superuser %}
+                  <li><a href="{% url 'registered_patients' %}">Patients</a></li>
+               {% endif %}
+            <li><a href="{% url 'pharmacy' %}">Pharmacy</a></li>
             <li class="dropdown"><a href="#"><span>Departments</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
               <ul>
-                <li><a href="#">Cardiology</a></li>
+                 <li><a href="#">Cardiology</a></li>
                 <li><a href="#">Radiology</a></li>
                 <li><a href="#">Neurology</a></li>
                 <li><a href="#">Mental Health</a></li>
@@ -83,12 +89,11 @@
 
               </ul>
             </li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+          </ul>
         </nav>
 
-        <a class="cta-btn d-none d-sm-block" href="#appointment">Make an Appointment</a>
+        <a class="cta-btn d-none d-sm-block" href="{% url 'login' %}">Login</a>
 
 
       </div>
@@ -179,10 +184,9 @@
     </div><!-- /About Section -->
 
 
+</main>
 
 
-
-  </main>
   <footer id="footer" class="footer light-background">
 
     <div class="container footer-top">
@@ -208,9 +212,10 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
+            <li><a href="{% url 'homepage' %}">Home</a></li>
+            <li><a href="{% url 'homepage' %}#services">Services</a></li>
+               <li><a href="{% url 'doctors' %}">Doctors</a></li>
+              <li><a href="{% url 'pharmacy' %}">Pharmacy</a></li>
             <li><a href="#">Terms of service</a></li>
             <li><a href="#">Privacy policy</a></li>
           </ul>
@@ -219,12 +224,12 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Our Services</h4>
           <ul>
-            <li><a href="#">Cardiology</a></li>
-            <li><a href="#">Radiology</a></li>
-            <li><a href="#">Neurology</a></li>
-            <li><a href="#">Mental Health</a></li>
-            <li><a href="#">Oncology</a></li>
-            <li><a href="#">Osteology</a></li>
+            <li><a href="{% url 'homepage' %}#services">Cardiology</a></li>
+            <li><a href="{% url 'homepage' %}#services">Radiology</a></li>
+            <li><a href="{% url 'homepage' %}#services">Neurology</a></li>
+            <li><a href="{% url 'homepage' %}#services">Mental Health</a></li>
+            <li><a href="{% url 'homepage' %}#services">Oncology</a></li>
+            <li><a href="{% url 'homepage' %}#services">Osteology</a></li>
 
           </ul>
         </div>
@@ -243,9 +248,6 @@
     </div>
 
   </footer>
-
-
-
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

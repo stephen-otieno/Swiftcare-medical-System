@@ -141,10 +141,13 @@
 
         <nav id="navmenu" class="navmenu">
           <ul>
-            <li><a href="{% url 'homepage' %}" class="active">Home<br></a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#doctors">Doctors</a></li>
+            <li><a href="{% url 'homepage' %}" >Home<br></a></li>
+            <li><a href="{% url 'homepage' %}#services">Services</a></li>
+            <li><a href="{% url 'doctors' %}" class="active">Doctors</a></li>
+              {% if user.is_superuser %}
+                  <li><a href="{% url 'registered_patients' %}">Patients</a></li>
+               {% endif %}
+            <li><a href="{% url 'pharmacy' %}">Pharmacy</a></li>
             <li class="dropdown"><a href="#"><span>Departments</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
               <ul>
                  <li><a href="#">Cardiology</a></li>
@@ -159,12 +162,10 @@
               </ul>
             </li>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-
           </ul>
         </nav>
 
-        <a class="cta-btn d-none d-sm-block" href="#appointment">Make an Appointment</a>
-{#        <a class="cta-btn d-none d-sm-block" href="{% url 'login' %}">Login</a>#}
+        <a class="cta-btn d-none d-sm-block" href="{% url 'login' %}">Login</a>
 
 
       </div>
@@ -212,108 +213,6 @@
 </div>
 </main>
 
-  {#      <div class="container">#}
-{##}
-{#        <div class="row gy-4">#}
-{##}
-{#          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">#}
-{#            <div class="team-member d-flex align-items-start">#}
-{#              <div class="pic"><img src="{% static 'assets/img/doctors/doctors-1.jpg' %}" class="img-fluid" alt=""></div>#}
-{#              <div class="member-info">#}
-{#                <h4>Walter White</h4>#}
-{#                <span>Cardiology</span>#}
-{##}
-{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Profile</button>#}
-{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Schedule</button>#}
-{#                  <br> <br>#}
-{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none;  margin-left: .5cm">Appointment</button>#}
-{##}
-{##}
-{#              </div>#}
-{#            </div>#}
-{#          </div><!-- End Team Member -->#}
-{##}
-{#          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">#}
-{#            <div class="team-member d-flex align-items-start">#}
-{#              <div class="pic"><img src="{% static 'assets/img/doctors/doctors-2.jpg' %}" class="img-fluid" alt=""></div>#}
-{#              <div class="member-info">#}
-{#                <h4>Sarah Jhonson</h4>#}
-{#                <span>Radiology</span>#}
-{#                     <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Profile</button>#}
-{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Schedule</button>#}
-{#                  <br> <br>#}
-{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none;  margin-left: .5cm">Appointment</button>#}
-{##}
-{##}
-{#              </div>#}
-{#            </div>#}
-{#          </div><!-- End Team Member -->#}
-{##}
-{#          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">#}
-{#            <div class="team-member d-flex align-items-start">#}
-{#              <div class="pic"><img src="{% static 'assets/img/doctors/doctors-3.jpg' %}" class="img-fluid" alt=""></div>#}
-{#              <div class="member-info">#}
-{#                <h4>William Anderson</h4>#}
-{#                <span>Neurology</span>#}
-{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Profile</button>#}
-{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Schedule</button>#}
-{#                  <br> <br>#}
-{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none;  margin-left: .5cm">Appointment</button>#}
-{##}
-{#              </div>#}
-{#            </div>#}
-{#          </div><!-- End Team Member -->#}
-{##}
-{#          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">#}
-{#            <div class="team-member d-flex align-items-start">#}
-{#              <div class="pic"><img src="{% static 'assets/img/doctors/doctors-4.jpg' %}" class="img-fluid" alt=""></div>#}
-{#              <div class="member-info">#}
-{#                <h4>Amanda Jepson</h4>#}
-{#                <span>Mental Health</span>#}
-{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Profile</button>#}
-{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Schedule</button>#}
-{#                  <br> <br>#}
-{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none;  margin-left:.5cm">Appointment</button>#}
-{##}
-{#              </div>#}
-{#            </div>#}
-{#          </div><!-- End Team Member -->#}
-{##}
-{#             <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">#}
-{#            <div class="team-member d-flex align-items-start">#}
-{#              <div class="pic"><img src="{% static 'assets/img/doctors/doctors-3.jpg' %}" class="img-fluid" alt=""></div>#}
-{#              <div class="member-info">#}
-{#                <h4>William Anderson</h4>#}
-{#                <span>Oncology</span>#}
-{#                 <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Profile</button>#}
-{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Schedule</button>#}
-{#                  <br> <br>#}
-{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none;  margin-left: .5cm">Appointment</button>#}
-{##}
-{#              </div>#}
-{#            </div>#}
-{#          </div><!-- End Team Member -->#}
-{##}
-{#          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">#}
-{#            <div class="team-member d-flex align-items-start">#}
-{#              <div class="pic"><img src="{% static 'assets/img/doctors/doctors-4.jpg' %}" class="img-fluid" alt=""></div>#}
-{#              <div class="member-info">#}
-{#                <h4>Amanda Jepson</h4>#}
-{#                <span>Osteology</span>#}
-{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Profile</button>#}
-{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none">Schedule</button>#}
-{#                  <br> <br>#}
-{#                  <button style="background-color: #1977cc; color:white;border-radius: 10px; border: none; margin-left: .5cm">Appointment</button>#}
-{##}
-{#              </div>#}
-{#            </div>#}
-{#          </div><!-- End Team Member -->#}
-{##}
-{#        </div>#}
-{##}
-{#      </div>#}
-{##}
-{#    </section><!-- /Doctors Section -->#}
 
 
 
@@ -342,9 +241,10 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
+            <li><a href="{% url 'homepage' %}">Home</a></li>
+            <li><a href="{% url 'homepage' %}#services">Services</a></li>
+               <li><a href="{% url 'doctors' %}">Doctors</a></li>
+              <li><a href="{% url 'pharmacy' %}">Pharmacy</a></li>
             <li><a href="#">Terms of service</a></li>
             <li><a href="#">Privacy policy</a></li>
           </ul>
@@ -353,12 +253,12 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Our Services</h4>
           <ul>
-            <li><a href="#">Cardiology</a></li>
-            <li><a href="#">Radiology</a></li>
-            <li><a href="#">Neurology</a></li>
-            <li><a href="#">Mental Health</a></li>
-            <li><a href="#">Oncology</a></li>
-            <li><a href="#">Osteology</a></li>
+            <li><a href="{% url 'homepage' %}#services">Cardiology</a></li>
+            <li><a href="{% url 'homepage' %}#services">Radiology</a></li>
+            <li><a href="{% url 'homepage' %}#services">Neurology</a></li>
+            <li><a href="{% url 'homepage' %}#services">Mental Health</a></li>
+            <li><a href="{% url 'homepage' %}#services">Oncology</a></li>
+            <li><a href="{% url 'homepage' %}#services">Osteology</a></li>
 
           </ul>
         </div>

@@ -94,6 +94,7 @@ def doctor_details(request):
 
 
 
+@login_required(login_url="login")
 def view_doctors(request):
     doctors = Doctor.objects.all()
     return render(request,'doctors.html',{'doctors':doctors})
@@ -103,7 +104,7 @@ def view_doctors(request):
 def registered_patients(request):
     patients = Patient.objects.all()
     return render(request,'registered_patients.html',{'patients':patients})
-
+@login_required(login_url="login")
 def pharmacy(request):
     medicines = Medicine.objects.all()
     return render(request, 'pharmacy.html',{'medicines':medicines})
