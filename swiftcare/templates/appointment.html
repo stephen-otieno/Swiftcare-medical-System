@@ -31,111 +31,6 @@
   <link href="{%  static 'assets/css/main.css' %}" rel="stylesheet">
 
 
-   <style>
-    /* Hide extra details by default */
-    .extra-details {
-        display: none;
-    }
-
-    /* Expanded Card Styles */
-    .doctor-card.expanded {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 50vw;
-        height: 95vh;
-        background: white;
-        z-index: 1000;
-        padding: 40px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        transition: all 0.3s ease-in-out;
-        border-radius: 15px;
-        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Show extra details when expanded */
-    .doctor-card.expanded .extra-details {
-        display: block;
-    }
-
-    /* Make Image Bigger in Expanded View */
-    .doctor-card.expanded .doctor-image {
-        max-width: 300px;
-        width: 100%;
-        height: auto;
-        border-radius: 50%;
-        margin-bottom: 15px;
-    }
-
-    /* Prevent background scrolling */
-    .no-scroll {
-        overflow: hidden;
-    }
-
-    /* Styled Profile Button */
-    .profile-btn {
-        background-color: #1977cc;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 8px;
-        font-weight: bold;
-        transition: background 0.3s ease-in-out;
-        margin-left: 10px;
-    }
-
-    .appointment_btn {
-
-        background-color: #1977cc;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 8px;
-        font-weight: bold;
-        transition: background 0.3s ease-in-out;
-        margin-left: 10px;
-
-    }
-    /* Hide Profile Button when Card is Expanded */
-.doctor-card.expanded .profile-btn {
-    display: none;
-}
-
-
-    .profile-btn:hover {
-        background-color: #135ca1;
-    }
-
-    /* Styled Close Button (Initially Hidden) */
-    .close-btn {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        background: red;
-        color: white;
-        border: none;
-        font-size: 24px;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        cursor: pointer;
-        display: none; /* Hidden initially */
-        align-items: center;
-        justify-content: center;
-    }
-
-    .close-btn:hover {
-        background: darkred;
-    }
-</style>
-
-
-
 </head>
 
 <body class="index-page">
@@ -154,12 +49,10 @@
 
         <nav id="navmenu" class="navmenu">
           <ul>
-            <li><a href="{% url 'homepage' %}" >Home<br></a></li>
+            <li><a href="{% url 'homepage' %}" class="active">Home<br></a></li>
             <li><a href="{% url 'homepage' %}#services">Services</a></li>
-            <li><a href="{% url 'doctors' %}" class="active">Doctors</a></li>
-              {% if user.is_superuser %}
-                  <li><a href="{% url 'registered_patients' %}">Patients</a></li>
-               {% endif %}
+            <li><a href="{% url 'doctors' %}">Doctors</a></li>
+            <li><a href="{% url 'registered_patients' %}">Patients</a></li>
             <li><a href="{% url 'pharmacy' %}">Pharmacy</a></li>
             <li class="dropdown"><a href="#"><span>Departments</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
               <ul>
@@ -186,49 +79,58 @@
     </div>
 
   </header>
+<main class="main">
+  <div class="container d-flex justify-content-center">
+    <div class="col-md-4">  <!-- Restrict width -->
+        <h2 class="text-center">Schedule an Appointment with {{ doctor.doctor_name }}</h2>
+        <br><br>
 
-<main>
+        <!-- Doctor's Image -->
+        <div class="text-center">
+            <img src="{{ doctor.doctor.image.url }}" alt="{{ doctor.doctor_name }}" class="img-fluid rounded" style="max-width: 200px;">
+        </div>
 
-<div class="container m-3 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-    <div class="row justify-content-center g-3">
-        {% for doctor in doctors %}
-            <div class="col-md-4">
-                <div class="card doctor-card m-3">
-                    <div class="card-body text-center">
-                        {% if doctor.doctor_image %}
-                            <img src="{{ doctor.doctor_image.url }}" class="img-fluid rounded doctor-image" alt="Doctor Image">
-                        {% else %}
-                            <img src="/media/doctors/default.jpg" class="img-fluid rounded doctor-image" alt="Default Doctor Image">
-                        {% endif %}
+      <form action="{% url 'book_appointment' doctor.id %}" method="POST" enctype="multipart/form-data" class="mt-4">
+            {% csrf_token %}
 
-                        <h5 class="doctor-name">{{ doctor.doctor_name }}</h5>
-                        <p class="doctor-specialization"><b>Specialization:</b> {{ doctor.doctor_specialization }}</p>
-
-                        <!-- Extra details initially hidden -->
-                        <div class="extra-details">
-                            <p><b>Phone:</b> {{ doctor.doctor_contact }}</p>
-                            <p><b>Email:</b> {{ doctor.doctor_email }}</p>
-                            <p><b>Availability:</b> {{ doctor.doctor_availability|default:"Not Available" }}</p>
-                        </div>
-
-                        <!-- Toggle Button -->
-                        <button class="btn profile-btn">View Profile</button>
-                           <a href="{% url 'book_appointment' doctor.id %}">
-    <button class="btn appointment_btn">Schedule Appointment</button>
-</a>
-
-
-                        <!-- Close Button (Initially Hidden) -->
-                        <button class="btn close-btn">×</button>
-                    </div>
-                </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Your Name:</label>
+                <input type="text" name="name" id="name" class="form-control" required>
             </div>
-        {% endfor %}
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Your Email:</label>
+                <input type="email" name="email" id="email" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="date" class="form-label">Appointment Date:</label>
+                <input type="date" name="date" id="date" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="time" class="form-label">Appointment Time:</label>
+                <input type="time" name="time" id="time" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="reason" class="form-label">Reason for Visit:</label>
+                <textarea name="reason" id="reason" class="form-control" rows="4" required></textarea>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Confirm Appointment</button>
+            </div>
+
+            {% if success %}
+            <div class="alert alert-success mt-3 text-center">Your appointment has been scheduled successfully!</div>
+            {% endif %}
+        </form>
     </div>
 </div>
+
 </main>
-
-
+  <br><br>
 
 
   <footer id="footer" class="footer light-background">
@@ -258,7 +160,7 @@
           <ul>
             <li><a href="{% url 'homepage' %}">Home</a></li>
             <li><a href="{% url 'homepage' %}#services">Services</a></li>
-               <li><a href="{% url 'doctors' %}">Doctors</a></li>
+              <li><a href="{% url 'doctors' %}">Doctors</a></li>
               <li><a href="{% url 'pharmacy' %}">Pharmacy</a></li>
             <li><a href="#">Terms of service</a></li>
             <li><a href="#">Privacy policy</a></li>
@@ -308,43 +210,8 @@
   <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
 
   <!-- Main JS File -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll(".profile-btn").forEach(button => {
-            button.addEventListener("click", function () {
-                let card = this.closest(".doctor-card");
-
-                // Collapse other cards before expanding the clicked one
-                document.querySelectorAll(".doctor-card").forEach(otherCard => {
-                    otherCard.classList.remove("expanded");
-                    otherCard.querySelector(".close-btn").style.display = "none";
-                });
-
-                // Expand clicked card
-                document.body.classList.add("no-scroll");
-                card.classList.add("expanded");
-                card.querySelector(".close-btn").style.display = "block";
-            });
-        });
-
-        document.querySelectorAll(".close-btn").forEach(button => {
-            button.addEventListener("click", function () {
-                let card = this.closest(".doctor-card");
-                document.body.classList.remove("no-scroll");
-                card.classList.remove("expanded");
-                this.style.display = "none"; // Hide close button
-            });
-        });
-    });
-</script>
-
-
   <script src="{% static 'assets/js/main.js' %}"></script>
 
 </body>
 
 </html>
-
-
-
-

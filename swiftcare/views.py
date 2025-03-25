@@ -1,7 +1,7 @@
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render,redirect
-from swiftcare.models import Patient,Doctor, Medicine
+from django.shortcuts import render, redirect, get_object_or_404
+from swiftcare.models import Patient,Doctor,Medicine,Appointment
 from django.contrib import messages
 from .forms import RegisterForm,CustomLoginForm
 
@@ -134,5 +134,31 @@ def medicine(request):
     return render(request, 'medicine.html')
 
 
+def appointment(request, doctor_id):
+    doctor = get_object_or_404(Doctor, id=doctor_id)  # Fetch doctor by ID
+
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        date = request.POST.get("date")
+        time = request.POST.get("time")
+        reason = request.POST.get("reason")
+
+        if name and email and date and time and reason:  # Ensure all fields are provided
+            appointment = Appointment(
+                doctor=doctor,  # Associate with the selected doctor
+                name=name,
+                email=email,
+                date=date,
+                time=time,
+                reason=reason
+            )
+            appointment.save()
 
 
+    return render(request, "appointment.html", {"doctor": doctor})
+
+
+def scheduled_appointments(request):
+    appointments = Appointment.objects.all().order_by("date", "time")
+    return render(request, "scheduled_appointments.html", {"appointments": appointments})

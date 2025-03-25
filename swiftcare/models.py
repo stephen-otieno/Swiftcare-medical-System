@@ -109,6 +109,16 @@ class Medicine(models.Model):
     def __str__(self):
             return f"{self.medicine_name}"
 
+class Appointment(models.Model):
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    date = models.DateField()
+    time = models.TimeField()
+    reason = models.TextField()
+
+    def __str__(self):
+        return f"Appointment with {self.doctor} on {self.date} at {self.time}"
 
 
 
