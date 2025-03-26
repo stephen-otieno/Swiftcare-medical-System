@@ -30,6 +30,27 @@
   <!-- Main CSS File -->
   <link href="{%  static 'assets/css/main.css' %}" rel="stylesheet">
 
+    <style>
+    .appointment_form {
+        background-color: #f8f9fa; /* Light gray background */
+        padding: 20px;
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+
+
+    .alert-container {
+    position: fixed;
+    top: 20px; /* Adjust position from the top */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050; /* Higher than Bootstrap modals */
+    max-width: 400px; /* Prevents full-width stretching */
+    width: 100%;
+  }
+</style>
+
+
 
 </head>
 
@@ -79,18 +100,32 @@
     </div>
 
   </header>
-<main class="main">
+<main class="main"><br><br><br>
+
+{% if messages %}
+  <div class="alert-container">
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
   <div class="container d-flex justify-content-center">
+   <!-- Doctor's Image -->
+        {% if doctor.doctor_image %}
+                            <img src="{{ doctor.doctor_image.url }}" class="img-fluid rounded doctor-image" alt="Doctor Image">
+                        {% else %}
+                            <img src="/media/doctors/default.jpg" class="img-fluid rounded doctor-image" alt="Default Doctor Image">
+                        {% endif %}
     <div class="col-md-4">  <!-- Restrict width -->
         <h2 class="text-center">Schedule an Appointment with {{ doctor.doctor_name }}</h2>
-        <br><br>
+        <br>
 
-        <!-- Doctor's Image -->
-        <div class="text-center">
-            <img src="{{ doctor.doctor.image.url }}" alt="{{ doctor.doctor_name }}" class="img-fluid rounded" style="max-width: 200px;">
-        </div>
 
-      <form action="{% url 'book_appointment' doctor.id %}" method="POST" enctype="multipart/form-data" class="mt-4">
+
+      <form action="{% url 'book_appointment' doctor.id %}" method="POST" enctype="multipart/form-data" class="mt-4 appointment_form">
             {% csrf_token %}
 
             <div class="mb-3">
@@ -113,9 +148,23 @@
                 <input type="time" name="time" id="time" class="form-control" required>
             </div>
 
+
+    <!-- Virtual or Physical Appointment Selection -->
+    <div class="mb-3">
+        <label class="form-label">Appointment Type:</label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="appointment_type" id="physical" value="Physical" required>
+            <label class="form-check-label" for="physical">Physical Appointment</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="appointment_type" id="virtual" value="Virtual">
+            <label class="form-check-label" for="virtual">Virtual Appointment</label>
+        </div>
+    </div>
+
             <div class="mb-3">
                 <label for="reason" class="form-label">Reason for Visit:</label>
-                <textarea name="reason" id="reason" class="form-control" rows="4" required></textarea>
+                <textarea name="reason" id="reason" class="form-control" rows="4" ></textarea>
             </div>
 
             <div class="text-center">
@@ -211,6 +260,17 @@
 
   <!-- Main JS File -->
   <script src="{% static 'assets/js/main.js' %}"></script>
+
+<script>
+  setTimeout(function() {
+    let alertBox = document.querySelector(".alert");
+    if (alertBox) {
+      alertBox.style.transition = "opacity 0.5s";
+      alertBox.style.opacity = "0";
+      setTimeout(() => alertBox.remove(), 500);  // Remove element after fade-out
+    }
+  }, 3000);  // 3 seconds
+</script>
 
 </body>
 

@@ -39,6 +39,20 @@ urlpatterns = [
 
     path("scheduled_appointments/", views.scheduled_appointments, name="scheduled_appointments"),
 
+    path('pay/', views.pay, name='pay'),
+
+    path('payment-cancelled/', views.payment_failed, name='payment_cancelled'),
+
+    path('payment-success/', views.payment_success, name='payment_success'),
+
+    path('waiting/<int:transaction_id>/', views.waiting_page, name='waiting_page'),
+
+    path('stk_push/', views.stk_push, name='stk_push'),
+
+    path('callback', views.callback, name='callback'),
+
+    path('check_status/<int:transaction_id>/', views.check_status, name='check_status'),
+
 ]
 
 if settings.DEBUG:

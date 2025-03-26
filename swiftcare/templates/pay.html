@@ -79,46 +79,32 @@
     </div>
 
   </header>
-<main class="main container mt-4"><br><br><br>
-    <h2 class="text-center mb-4">Scheduled Appointments</h2>
 
-    {% if appointments %}
-    <div class="table-responsive">
-      <table class="table table-bordered table-hover  table-primary"><br>
-    <tr>
-        <th>ID</th>
-        <th>Doctor</th>  <!-- Add Doctor Name Column -->
-        <th>Name</th>
-        <th>Email</th>
-        <th>Booked Date</th>
-        <th>Booked Time</th>
-        <th>Appointment Type</th>
-        <th>Reason</th>
-    </tr>
+  <main class="main container"><br><br>
 
-    {% for appointment in appointments %}
-    <tr>
-        <td>{{ forloop.counter }}</td>
-        <td>{{ appointment.doctor.doctor_name }}</td>  <!-- Display Doctor Name -->
-        <td>{{ appointment.name }}</td>
-        <td>{{ appointment.email }}</td>
-        <td>{{ appointment.date }}</td>
-        <td>{{ appointment.time }}</td>
-        <td>{{ appointment.appointment_type }}</td>  <!-- Display appointment type -->
-        <td>{{ appointment.reason }}</td>
-    </tr>
-    {% endfor %}
-</table>
 
-    </div>
-    {% else %}
-    <p class="text-center text-muted">No scheduled appointments at the moment.</p>
-    {% endif %}
-</main>
+     <br><br><br>
+     <h1>Pay Now</h1> <br>
+     <div class="container payment_form ">
 
-  <br><br> <br><br><br><br><br><br>
+ <form action="/stk_push/" method="POST" class="light-background" >
+    {% csrf_token %}
 
-  <hr>
+    <input class="form-control w-25" name="phone" type="number" placeholder="Phone Number"  value="254" required><br><br>
+
+    <input class="form-control w-25" name="amount" type="number" required placeholder="Amount"><br><br>
+
+    <input class="button-form" type="submit" value="Pay Now">
+
+    </form>
+
+     </div>
+
+
+      <br><br><br><br>
+
+  </main>
+
   <footer id="footer" class="footer light-background">
 
     <div class="container footer-top">
@@ -201,4 +187,3 @@
 </body>
 
 </html>
-
