@@ -16,12 +16,17 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 
 from django.conf import settings
+from django.views.static import serve
+
 from swiftcare import views
 
 urlpatterns = [
+
+re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
     path('admin/', admin.site.urls),
     path('', views.homepage, name='homepage'),
     path('signup/', views.signup, name='signup'),
@@ -30,6 +35,8 @@ urlpatterns = [
 
     path('doctor_details/',views.doctor_details,name='doctor_details'),
     path('doctors/',views.view_doctors,name='doctors'),
+
+    path('contact_us/',views.feedback, name='contact'),
 
     path('registered_patients/',views.registered_patients,name='registered_patients'),
     path('pharmacy/', views.pharmacy, name='pharmacy'),

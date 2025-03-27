@@ -1,7 +1,7 @@
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from swiftcare.models import Patient,Doctor,Medicine,Appointment,Transaction
+from swiftcare.models import Patient,Doctor,Medicine,Appointment,Transaction,Contact
 from django.contrib import messages
 from .forms import RegisterForm,CustomLoginForm
 from django.views.decorators.csrf import csrf_exempt
@@ -100,7 +100,26 @@ def doctor_details(request):
 
     return render(request,'doctors_details.html')
 
+def feedback(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
 
+        contact=Contact(name=name,
+                        email=email,
+                        subject=subject,
+                        message=message
+                        )
+
+        contact.save()
+
+        messages.success(request, "Thank you! Your feedback has been submitted successfully.")
+
+        return redirect('/contact_us/')
+
+    return render(request, 'contact.html')
 
 
 @login_required(login_url="login")

@@ -123,10 +123,19 @@ class Appointment(models.Model):
     reason = models.TextField()
     appointment_type = models.CharField(max_length=10, choices=APPOINTMENT_TYPES, default='Physical')  # New field
 
-
-
     def __str__(self):
         return f"Appointment with {self.doctor.doctor_name} - {self.name}"
+
+class Contact(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+
 
 
 class Transaction(models.Model):
