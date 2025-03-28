@@ -1,0 +1,18 @@
+.details {
+    background-color: #1977cc;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    border-radius: 10px;
+    height: 17cm;
+    color: white;
+}
+
+
+.btn3{
+    color: white;
+    background-color: #0a58ca;
+    border: none;
+    border-radius: 8px;
+    margin: .4cm;
+}

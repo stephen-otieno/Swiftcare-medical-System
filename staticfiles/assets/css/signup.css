@@ -1,0 +1,30 @@
+
+.signup_form {
+    width: 8cm;
+    height: 14cm;
+    background-color: #1977cc;
+    color: white;
+    border-radius: 10px;
+    padding: 1cm;
+
+}
+
+.container {
+    margin-top: 3cm;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+}
+
+.login_link {
+    /*text-decoration: none;*/
+    color: darkblue;
+}
+
+.btn1 {
+    color: white;
+    background-color: blue;
+    border-radius: 8px;
+    border: none ;
+}
