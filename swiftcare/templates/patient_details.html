@@ -51,9 +51,11 @@
 
         <nav id="navmenu" class="navmenu">
           <ul>
-            <li><a href="{% url 'homepage' %}" class="active">Home<br></a></li>
+            <li><a href="{% url 'homepage' %}" >Home<br></a></li>
             <li><a href="{% url 'homepage' %}#services">Services</a></li>
+             <li><a href="{% url 'patient_details' %}" class="active">Reception</a></li>
             <li><a href="{% url 'doctors' %}">Doctors</a></li>
+
               {% if user.is_superuser %}
                   <li><a href="{% url 'registered_patients' %}">Patients</a></li>
                {% endif %}
@@ -75,7 +77,6 @@
           </ul>
         </nav>
 
-        <a class="cta-btn d-none d-sm-block" href="{% url 'login' %}">Login</a>
 
 
       </div>
@@ -87,7 +88,17 @@
 
   <main class="container">
 
+      {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert" id="successMessage">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
       <h3>Patient Details</h3> <br>
+
 
           <!-- About Section -->
 
@@ -247,6 +258,25 @@
 
   <!-- Main JS File -->
   <script src="{% static 'assets/js/main.js' %}"></script>
+<script>
+    // Wait for the page to load
+    document.addEventListener("DOMContentLoaded", function() {
+        // Select the success message
+        var successMessage = document.getElementById("successMessage");
+
+        // If it exists, fade out after 4 seconds (4000ms)
+        if (successMessage) {
+            setTimeout(function() {
+                successMessage.style.transition = "opacity 0.5s ease";
+                successMessage.style.opacity = "0";
+                setTimeout(function() {
+                    successMessage.style.display = "none";
+                }, 500); // Hide completely after fade-out
+            }, 4000);
+        }
+    });
+</script>
+
 
 </body>
 

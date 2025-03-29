@@ -75,8 +75,12 @@ def patient_details(request):
         )
 
         patient.save()
-    return render(request,'patient_details.html')
 
+        messages.success(request, "Patient details submitted successfully!")
+
+        return redirect("patient_details")
+
+    return render(request, 'patient_details.html')
 
 def doctor_details(request):
     if request.method == 'POST':
@@ -191,7 +195,7 @@ def appointment(request, doctor_id):
             # Redirect to prevent form resubmission on page refresh
             return redirect('book_appointment', doctor_id=doctor_id)
 
-    return render(request, "appointment.html", {"doctor": doctor})
+    return render(request, "appointment.html", {"doctor": doctor,"doctor_id":doctor_id})
 
 
 def scheduled_appointments(request):
